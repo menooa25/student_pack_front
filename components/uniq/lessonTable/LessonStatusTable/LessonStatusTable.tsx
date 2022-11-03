@@ -24,7 +24,11 @@ const LessonStatusTable: FC<Props> = ({ lessons }) => {
         </thead>
         <tbody>
           {lessons.map((l) => (
-            <LessonStatusRow onClick={setSelectedLessonId} lesson={l} />
+            <LessonStatusRow
+              key={l.id}
+              onClick={setSelectedLessonId}
+              lesson={l}
+            />
           ))}
         </tbody>
       </table>

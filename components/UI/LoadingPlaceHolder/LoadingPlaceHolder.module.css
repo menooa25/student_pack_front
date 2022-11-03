@@ -1,0 +1,17 @@
+@keyframes loading {
+  from {
+    background-color: black;
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+.root {
+  @apply inline-block rounded;
+  animation-name: loading;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
