@@ -1,14 +1,31 @@
-import { RequestLessonList } from "api/schema";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import LessonDetail from "../LessonDetail";
 import LessonStatusRow from "../LessonStatusRow";
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState } from "@redux/store";
+import { requestLessonDetail, requestLessonLis } from "api/services";
+import { setLesson, setLessons } from "./LessonStatusTableSlice";
 
-interface Props {
-  lessons: [RequestLessonList];
-}
-
-const LessonStatusTable: FC<Props> = ({ lessons }) => {
+const LessonStatusTable: FC = () => {
+  const dispatch = useDispatch();
+  const lessons = useSelector((state: RootState) => state.lesson.lessons);
   const [selectedLessonId, setSelectedLessonId] = useState<number>(-1);
+  useEffect(() => {
+    const sendRequest = async () => {
+      const { data } = await requestLessonLis();
+      dispatch(setLessons(data));
+    };
+    sendRequest();
+  }, []);
+  useEffect(() => {
+    const sendRequest = async () => {
+      const { data } = await requestLessonDetail(selectedLessonId);
+      dispatch(setLesson(data));
+    };
+    if (selectedLessonId !== -1) {
+      sendRequest();
+    }
+  }, [selectedLessonId]);
   return (
     <div className="overflow-x-auto rounded-md">
       <table className="table text-xs text-center table-zebra table-compact w-full ">
@@ -23,7 +40,7 @@ const LessonStatusTable: FC<Props> = ({ lessons }) => {
           </tr>
         </thead>
         <tbody>
-          {lessons.map((l) => (
+          {lessons?.map((l) => (
             <LessonStatusRow
               key={l.id}
               onClick={setSelectedLessonId}
@@ -32,10 +49,7 @@ const LessonStatusTable: FC<Props> = ({ lessons }) => {
           ))}
         </tbody>
       </table>
-      <LessonDetail
-        lessonId={selectedLessonId}
-        modalId={`lesson_detail_${selectedLessonId}`}
-      />
+      <LessonDetail modalId={`lesson_detail_${selectedLessonId}`} />
     </div>
   );
 };

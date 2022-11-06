@@ -1,30 +1,14 @@
 import { LoadingPlaceHolder } from "@components/UI";
-import { RequestLesson } from "api/schema";
-import { requestLessonDetail } from "api/services";
-import React, { FC, useEffect, useState } from "react";
+import { RootState } from "@redux/store";
+import { useSelector } from "react-redux";
+import React, { FC, useState } from "react";
 
 interface Props {
   modalId: string;
-  lessonId: number;
 }
 
-const LessonDetail: FC<Props> = ({ lessonId, modalId }) => {
-  const [lesson, setLesson] = useState<RequestLesson | null>(null);
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  useEffect(() => {
-    const sendRequest = async () => {
-      const data = await requestLessonDetail(lessonId);
-      setLesson(data);
-    };
-    if (lessonId !== -1 && lesson === null && modalIsOpen) {
-      sendRequest();
-    }
-  }, [lessonId, lesson, modalIsOpen]);
-  useEffect(() => {
-    if (!modalIsOpen) {
-      setLesson(null);
-    }
-  }, [modalIsOpen]);
+const LessonDetail: FC<Props> = ({ modalId }) => {
+  const lesson = useSelector((state: RootState) => state.lesson.lesson);
   const getUpdateTime = () => {
     const updated_at = lesson?.updated_at;
     if (updated_at) {
@@ -32,17 +16,10 @@ const LessonDetail: FC<Props> = ({ lessonId, modalId }) => {
     }
     return <LoadingPlaceHolder width={100} height={10} />;
   };
-  if (lessonId === -1) return <></>;
 
   return (
     <div>
-      <input
-        type="checkbox"
-        checked={modalIsOpen}
-        onChange={({ target: { checked } }) => setModalIsOpen(checked)}
-        id={modalId}
-        className="modal-toggle"
-      />
+      <input type="checkbox" id={modalId} className="modal-toggle" />
       <div className="modal ">
         <div className="modal-box relative  ">
           <label

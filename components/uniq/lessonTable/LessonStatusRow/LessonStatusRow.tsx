@@ -1,9 +1,8 @@
-import { RequestLessonList } from "api/schema";
+import { RequestLessonListSingle } from "api/schema";
 import React, { FC } from "react";
-import LessonDetail from "../LessonDetail";
 
 interface Props {
-  lesson: RequestLessonList;
+  lesson: RequestLessonListSingle;
   onClick: (id: number) => void;
 }
 

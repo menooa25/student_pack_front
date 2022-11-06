@@ -1,4 +1,4 @@
-export interface RequestLessonList {
+export interface RequestLessonListSingle {
   name: string;
   lesson_time: string;
   lesson_day: number;
@@ -9,6 +9,9 @@ export interface RequestLessonList {
   status: string;
   id: number;
 }
+
+export type RequestLessonList = [RequestLessonListSingle];
+
 export interface RequestLesson {
   name: string;
   lesson_time: string;

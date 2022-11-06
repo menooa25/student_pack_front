@@ -6,16 +6,7 @@ import Head from "next/head";
 import { FC } from "react";
 import s from "../styles/index.module.css";
 
-interface Props {
-  lessons: [RequestLessonList];
-}
-
-export const getServerSideProps = async () => {
-  const data = await requestLessonLis();
-  return { props: { lessons: data } };
-};
-
-const Home: FC<Props> & { Layout: LayoutType } = ({ lessons }) => {
+const Home: FC & { Layout: LayoutType } = () => {
   return (
     <div>
       <Head>
@@ -28,7 +19,7 @@ const Home: FC<Props> & { Layout: LayoutType } = ({ lessons }) => {
       </Head>
 
       <main className="p-1">
-        <LessonStatusTable lessons={lessons} />
+        <LessonStatusTable />
       </main>
 
       <footer></footer>
