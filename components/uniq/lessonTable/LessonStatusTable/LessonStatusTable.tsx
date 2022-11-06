@@ -3,7 +3,7 @@ import LessonDetail from "../LessonDetail";
 import LessonStatusRow from "../LessonStatusRow";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "@redux/store";
-import { requestLessonDetail, requestLessonLis } from "api/services";
+import { requestLessonDetail, requestLessonList } from "api/services";
 import { setLesson, setLessons } from "./LessonStatusTableSlice";
 
 const LessonStatusTable: FC = () => {
@@ -12,7 +12,7 @@ const LessonStatusTable: FC = () => {
   const [selectedLessonId, setSelectedLessonId] = useState<number>(-1);
   useEffect(() => {
     const sendRequest = async () => {
-      const { data } = await requestLessonLis();
+      const { data } = await requestLessonList();
       dispatch(setLessons(data));
     };
     sendRequest();

@@ -4,14 +4,22 @@ import { RequestLesson, RequestLessonList } from "./schema";
 
 const sesson = axios.create({ baseURL: BASE_URL });
 
-export const requestLessonLis = async () => {
+export const requestLessonList = async () => {
   const resp: AxiosResponse<RequestLessonList, any> = await sesson.get(
     "api/lessons/v1/"
   );
   return resp;
 };
+export const requestLessonListSearch = async (search: string) => {
+  const resp: AxiosResponse<RequestLessonList, any> = await sesson.get(
+    "api/lessons/v1/",
+    { params: { search } }
+  );
+  return resp;
+};
 export const requestLessonDetail = async (id: number) => {
-
-    const resp:AxiosResponse<RequestLesson,any> =  await sesson.get(`api/lessons/v1/${id}`)
-    return resp
+  const resp: AxiosResponse<RequestLesson, any> = await sesson.get(
+    `api/lessons/v1/${id}`
+  );
+  return resp;
 };

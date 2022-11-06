@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { LayoutType } from "../components/UI";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
+import { Search } from "@components/uniq";
 const Noop: LayoutType = ({ children }) => <>{children}</>;
 
 export default function App({
@@ -12,9 +13,9 @@ export default function App({
   const Layout = Component.Layout ?? Noop;
   return (
     <Provider store={store}>
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+      <Layout search={<Search />}>
+        <Component {...pageProps} />
+      </Layout>
     </Provider>
   );
 }

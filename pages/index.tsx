@@ -1,7 +1,7 @@
 import { Layout, LayoutType } from "@components/UI";
 import { LessonStatusTable } from "@components/uniq";
 import { RequestLessonList } from "api/schema";
-import { requestLessonLis } from "api/services";
+import { requestLessonList } from "api/services";
 import Head from "next/head";
 import { FC } from "react";
 import s from "../styles/index.module.css";
