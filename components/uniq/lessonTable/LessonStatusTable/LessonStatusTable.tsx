@@ -4,7 +4,7 @@ import LessonStatusRow from "../LessonStatusRow";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "@redux/store";
 import { requestLessonDetail, requestLessonList } from "api/services";
-import { setLesson, setLessons } from "./LessonStatusTableSlice";
+import { setLesson, setLessons, sortByTime } from "./LessonStatusTableSlice";
 
 const LessonStatusTable: FC = () => {
   const dispatch = useDispatch();
@@ -31,13 +31,15 @@ const LessonStatusTable: FC = () => {
     <div className="overflow-x-auto rounded-md">
       <table className="table text-xs text-center table-zebra table-compact w-full ">
         <thead>
-          <tr className="overflow-hidden">
-            <th>نام درس</th>
-            <th>روز</th>
-            <th>ساختمان</th>
-            <th>ساعت شروع</th>
-            <th>استاد</th>
-            <th>وضعیت</th>
+          <tr className="overflow-hidden cursor-pointer">
+            <th onClick={() => dispatch(sortByTime("name"))}>نام درس</th>
+            <th onClick={() => dispatch(sortByTime("lesson_day"))}>روز</th>
+            <th onClick={() => dispatch(sortByTime("building"))}>ساختمان</th>
+            <th onClick={() => dispatch(sortByTime("lesson_time"))}>
+              ساعت شروع
+            </th>
+            <th onClick={() => dispatch(sortByTime("teacher"))}>استاد</th>
+            <th onClick={() => dispatch(sortByTime("status"))}>وضعیت</th>
           </tr>
         </thead>
         <tbody>
