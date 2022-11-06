@@ -9,17 +9,17 @@ interface Props {
 }
 
 const LessonDetail: FC<Props> = ({ lessonId, modalId }) => {
-  const [lesson, setLesson] = useState<RequestLesson | null>();
+  const [lesson, setLesson] = useState<RequestLesson | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   useEffect(() => {
     const sendRequest = async () => {
       const data = await requestLessonDetail(lessonId);
       setLesson(data);
     };
-    if (lessonId !== -1) {
+    if (lessonId !== -1 && lesson === null && modalIsOpen) {
       sendRequest();
     }
-  }, [lessonId]);
+  }, [lessonId, lesson, modalIsOpen]);
   useEffect(() => {
     if (!modalIsOpen) {
       setLesson(null);
@@ -47,7 +47,8 @@ const LessonDetail: FC<Props> = ({ lessonId, modalId }) => {
         <div className="modal-box relative  ">
           <label
             htmlFor={modalId}
-            className="btn btn-sm btn-circle absolute right-2 top-2">
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
             ✕
           </label>
           <h3 className=" font-bold text-center">
