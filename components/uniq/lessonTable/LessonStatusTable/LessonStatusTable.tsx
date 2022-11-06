@@ -19,6 +19,7 @@ const LessonStatusTable: FC = () => {
   }, []);
   useEffect(() => {
     const sendRequest = async () => {
+      dispatch(setLesson(null));
       const { data } = await requestLessonDetail(selectedLessonId);
       dispatch(setLesson(data));
     };

@@ -1,7 +1,7 @@
 import { LoadingPlaceHolder } from "@components/UI";
 import { RootState } from "@redux/store";
 import { useSelector } from "react-redux";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 
 interface Props {
   modalId: string;

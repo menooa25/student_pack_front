@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { RequestLesson, RequestLessonList } from "api/schema";
 
 export interface LessonState {
-  lessons:  RequestLessonList | null;
+  lessons: RequestLessonList | null;
   lesson: RequestLesson | null;
 }
 
@@ -19,7 +19,7 @@ export const LessonStatusTableSlice = createSlice({
     setLessons: (state, action: PayloadAction<RequestLessonList>) => {
       state.lessons = action.payload;
     },
-    setLesson: (state, action: PayloadAction<RequestLesson>) => {
+    setLesson: (state, action: PayloadAction<RequestLesson | null>) => {
       state.lesson = action.payload;
     },
   },
