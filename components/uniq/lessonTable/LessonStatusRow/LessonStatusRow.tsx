@@ -1,6 +1,6 @@
 import { RequestLessonListSingle } from "api/schema";
 import React, { FC } from "react";
-
+import { convetDayCode } from "@utils/lesson";
 interface Props {
   lesson: RequestLessonListSingle;
   onClick: (id: number) => void;
@@ -18,9 +18,9 @@ const LessonStatusRow: FC<Props> = ({ lesson, onClick }) => {
           {lesson.name}
         </label>
       </td>
-      <td>{lesson.lesson_day}</td>
+      <td>{convetDayCode(lesson.lesson_day)}</td>
       <td>{lesson.building}</td>
-      <td>{lesson.lesson_time}</td>
+      <td>{lesson.lesson_time.slice(0, 5)}</td>
       <td>{lesson.teacher}</td>
       <td>{lesson.status}</td>
     </tr>

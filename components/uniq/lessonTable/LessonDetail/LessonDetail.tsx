@@ -2,6 +2,7 @@ import { LoadingPlaceHolder } from "@components/UI";
 import { RootState } from "@redux/store";
 import { useSelector } from "react-redux";
 import React, { FC } from "react";
+import { convetDayCode } from "@utils/lesson";
 
 interface Props {
   modalId: string;
@@ -38,7 +39,7 @@ const LessonDetail: FC<Props> = ({ modalId }) => {
             </span>
             <span className="block">
               روز:{" "}
-              {lesson?.lesson_day ?? (
+              {(lesson && convetDayCode(lesson?.lesson_day)) ?? (
                 <LoadingPlaceHolder width={100} height={10} />
               )}
             </span>
@@ -50,7 +51,7 @@ const LessonDetail: FC<Props> = ({ modalId }) => {
             </span>
             <span className="block">
               زمان کلاس:{" "}
-              {lesson?.lesson_time ?? (
+              {lesson?.lesson_time.slice(0, 5) ?? (
                 <LoadingPlaceHolder width={100} height={10} />
               )}
             </span>
