@@ -2,12 +2,12 @@ type ConvetDayCodeString =
   | "شنبه"
   | "یکشنبه"
   | "دوشنبه"
-  | "سه شنبه"
+  | "سه‌شنبه"
   | "چهارشنبه"
   | "پنجشنبه"
   | "جمعه";
 
-type ConvertDayCodeNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+type ConvertDayCodeNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 export const convetDayCode = (
   day: ConvertDayCodeNumber | ConvetDayCodeString
@@ -16,7 +16,7 @@ export const convetDayCode = (
     0: "شنبه",
     1: "یکشنبه",
     2: "دوشنبه",
-    3: "سه شنبه",
+    3: "سه‌شنبه",
     4: "چهارشنبه",
     5: "پنجشنبه",
     6: "جمعه",

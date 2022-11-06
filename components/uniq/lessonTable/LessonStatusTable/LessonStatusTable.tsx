@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "@redux/store";
 import { requestLessonDetail, requestLessonList } from "api/services";
 import { setLesson, setLessons, sortByTime } from "./LessonStatusTableSlice";
+import Filters from "../Filters/Filters";
 
 const LessonStatusTable: FC = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,8 @@ const LessonStatusTable: FC = () => {
   }, [selectedLessonId]);
   return (
     <div className="overflow-x-auto rounded-md">
-      <table className="table text-xs text-center table-zebra table-compact w-full ">
+      <Filters />
+      <table className="table text-xs text-center table-zebra table-compact w-full mt-1">
         <thead>
           <tr className="overflow-hidden cursor-pointer">
             <th onClick={() => dispatch(sortByTime("name"))}>نام درس</th>
