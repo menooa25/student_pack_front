@@ -38,7 +38,7 @@ export const LessonStatusTableSlice = createSlice({
       const payload = action.payload;
       if (state.sortedBy.length && state.sortedBy.indexOf(payload) !== -1) {
         state.lessons?.sort((a, b) => (a[payload] < b[payload] ? 1 : -1));
-        state.sortedBy.pop(payload);
+        state.sortedBy = state.sortedBy.filter((by) => by !== payload);
       } else {
         state.lessons?.sort((a, b) => (a[payload] < b[payload] ? -1 : 1));
         state.sortedBy.push(payload);
