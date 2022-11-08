@@ -1,16 +1,17 @@
-import { requestLessonFilter, requestLessonFilterOptions } from "api/services";
+import { requestLessonFilterOptions } from "api/services";
 import React, { FC, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setLessons } from "../LessonStatusTable";
 
 interface Props {
   className?: string;
+  selectedTeacher: string;
+  setSelectedTeacher: (selectedTeacher: string) => void;
 }
 
-const TeacherFilter: FC<Props> = ({ className = "" }) => {
-  const [isInitial, setIsInitial] = useState<boolean>(true);
-  const [selectedTeacher, setSelectedTeacher] = useState<string>("");
-  const dispatch = useDispatch();
+const TeacherFilter: FC<Props> = ({
+  className = "",
+  selectedTeacher,
+  setSelectedTeacher,
+}) => {
   const [teachers, setTeachers] = useState<
     Array<{ name: string; id: number | string }>
   >([]);
@@ -21,22 +22,13 @@ const TeacherFilter: FC<Props> = ({ className = "" }) => {
     };
     sendRequest();
   }, []);
-  useEffect(() => {
-    const sendRequest = async () => {
-      const { data } = await requestLessonFilter({
-        teacher__id: selectedTeacher,
-      });
-      dispatch(setLessons(data));
-    };
-    if (!isInitial) sendRequest();
-    else setIsInitial(false);
-  }, [selectedTeacher]);
+
   return (
     <div className={className}>
       <select
         value={selectedTeacher}
         onChange={({ target: { value } }) => setSelectedTeacher(value)}
-        className="focus:outline-none select select-bordered select-xs w-full max-w-xs text-end"
+        className="focus:outline-none select select-bordered select-xs w-full max-w-xs text-end border-none"
       >
         {teachers.map(({ id, name }) => (
           <option key={id} value={id}>

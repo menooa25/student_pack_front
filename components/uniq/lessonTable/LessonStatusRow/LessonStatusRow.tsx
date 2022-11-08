@@ -10,7 +10,7 @@ interface Props {
 const LessonStatusRow: FC<Props> = ({ lesson, onClick }) => {
   return (
     <tr>
-      <td className="sticky left-0 text-start  ">
+      <td className="sticky left-0 text-center  ">
         <label
           className="cursor-pointer"
           htmlFor={`lesson_detail_${lesson.id}`}

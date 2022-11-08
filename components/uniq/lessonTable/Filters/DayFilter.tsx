@@ -1,25 +1,17 @@
 import { LessonDayFilter } from "api/schema";
-import { requestLessonFilter } from "api/services";
-import React, { FC, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setLessons } from "../LessonStatusTable";
+import React, { FC } from "react";
 
 interface Props {
   className?: string;
+  selectedDay: LessonDayFilter;
+  setSelectedDay: (selectedDay: LessonDayFilter) => void;
 }
 
-const DayFilter: FC<Props> = ({ className = "" }) => {
-  const [isInitial, setIsInitial] = useState<boolean>(true);
-  const [selectedDay, setSelectedDay] = useState<LessonDayFilter>("");
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const sendRequest = async () => {
-      const { data } = await requestLessonFilter({ lesson_day: selectedDay });
-      dispatch(setLessons(data));
-    };
-    if (!isInitial) sendRequest();
-    else setIsInitial(false);
-  }, [selectedDay]);
+const DayFilter: FC<Props> = ({
+  className = "",
+  selectedDay,
+  setSelectedDay,
+}) => {
   return (
     <div className={className}>
       <select
@@ -27,7 +19,7 @@ const DayFilter: FC<Props> = ({ className = "" }) => {
         onChange={({ target: { value } }) =>
           setSelectedDay(value as LessonDayFilter)
         }
-        className="focus:outline-none select select-bordered select-xs w-full max-w-xs text-end"
+        className="focus:outline-none select select-bordered select-xs w-full max-w-xs text-end border-none"
       >
         <option value={""}>هر روز</option>
         <option value={"0"}>شنبه</option>
