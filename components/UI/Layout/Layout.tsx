@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { FC, ReactNode } from "react";
 import { FaUniversity } from "react-icons/fa";
 import s from "./Layout.module.css";
@@ -12,11 +13,15 @@ const Layout: LayoutType = ({ children, search }) => {
     <div className={s.root}>
       <div className="navbar bg-base-100 flex justify-center min-h-0 h-9">
         <div className="max-w-5xl w-full grid grid-cols-3">
-          <FaUniversity />
+          <Link href={"/"}>
+            <FaUniversity />
+          </Link>
 
           {search}
           <div className="flex justify-end">
-            <span className="btn btn-ghost btn-sm ">ورود</span>
+            <Link href={"/login"} className="btn btn-ghost btn-sm ">
+              ورود
+            </Link>
           </div>
         </div>
       </div>
