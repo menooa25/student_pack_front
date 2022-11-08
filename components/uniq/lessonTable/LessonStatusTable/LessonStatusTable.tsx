@@ -29,32 +29,34 @@ const LessonStatusTable: FC = () => {
     }
   }, [selectedLessonId]);
   return (
-    <div className="overflow-x-auto rounded-md">
+    <div>
       <Filters />
-      <table className="table text-xs text-center table-zebra table-compact w-full mt-1">
-        <thead>
-          <tr className="overflow-hidden cursor-pointer">
-            <th onClick={() => dispatch(sortByTime("name"))}>نام درس</th>
-            <th onClick={() => dispatch(sortByTime("lesson_day"))}>روز</th>
-            <th onClick={() => dispatch(sortByTime("building"))}>ساختمان</th>
-            <th onClick={() => dispatch(sortByTime("lesson_time"))}>
-              ساعت شروع
-            </th>
-            <th onClick={() => dispatch(sortByTime("teacher"))}>استاد</th>
-            <th onClick={() => dispatch(sortByTime("status"))}>وضعیت</th>
-          </tr>
-        </thead>
-        <tbody>
-          {lessons?.map((l) => (
-            <LessonStatusRow
-              key={l.id}
-              onClick={setSelectedLessonId}
-              lesson={l}
-            />
-          ))}
-        </tbody>
-      </table>
-      <LessonDetail modalId={`lesson_detail_${selectedLessonId}`} />
+      <div className="overflow-x-auto rounded-lg mt-1">
+        <table className="table text-xs text-center table-zebra table-compact w-full ">
+          <thead>
+            <tr className="cursor-pointer ">
+              <th onClick={() => dispatch(sortByTime("name"))}>نام درس</th>
+              <th onClick={() => dispatch(sortByTime("lesson_day"))}>روز</th>
+              <th onClick={() => dispatch(sortByTime("building"))}>ساختمان</th>
+              <th onClick={() => dispatch(sortByTime("lesson_time"))}>
+                ساعت شروع
+              </th>
+              <th onClick={() => dispatch(sortByTime("teacher"))}>استاد</th>
+              <th onClick={() => dispatch(sortByTime("status"))}>وضعیت</th>
+            </tr>
+          </thead>
+          <tbody>
+            {lessons?.map((l) => (
+              <LessonStatusRow
+                key={l.id}
+                onClick={setSelectedLessonId}
+                lesson={l}
+              />
+            ))}
+          </tbody>
+        </table>
+        <LessonDetail modalId={`lesson_detail_${selectedLessonId}`} />
+      </div>
     </div>
   );
 };
