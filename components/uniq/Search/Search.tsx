@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setLessons } from "../lessonTable";
 const Search = () => {
+  const [isInitial, setIsInitial] = useState<boolean>(true);
   const [searchValue, setSearchValue] = useState<string>("");
   const dispatch = useDispatch();
   useEffect(() => {
@@ -10,9 +11,10 @@ const Search = () => {
       const { data } = await requestLessonListSearch(searchValue);
       dispatch(setLessons(data));
     };
-
-    const timout = setTimeout(sendRequest, 300);
-    return () => clearTimeout(timout);
+    if (!isInitial) {
+      const timout = setTimeout(sendRequest, 300);
+      return () => clearTimeout(timout);
+    } else setIsInitial(false);
   }, [searchValue]);
   return (
     <div className="form-control">
