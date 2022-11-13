@@ -1,9 +1,11 @@
 import { LessonStatusTableSlice } from "@components/uniq/lessonTable";
+import { ProfileSlice } from "@components/uniq/profile";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
   reducer: {
     lesson: LessonStatusTableSlice.reducer,
+    profile: ProfileSlice.reducer,
   },
 });
 

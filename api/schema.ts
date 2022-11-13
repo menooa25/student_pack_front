@@ -33,3 +33,7 @@ export interface RequestLessonFilterOptions {
   status: Array<{ name: string; id: number }>;
   teacher: Array<{ name: string; id: number }>;
 }
+export interface RequestLogin {
+  access: string;
+  refresh: string;
+}

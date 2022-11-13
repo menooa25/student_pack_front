@@ -7,12 +7,12 @@ const Login: FC & { Layout: LayoutType } = () => {
   return (
     <div>
       <Head>
-        <title>Student Pack</title>
+        <title>Login</title>
         <meta
           name="description"
           content="A pack of things thal all student gonna need"
         />
-        <link rel="icon" href="/favicon.ico" />
+       <link rel="icon" href="/favico.svg" type="image/svg+xml" />
       </Head>
 
       <main>

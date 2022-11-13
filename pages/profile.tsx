@@ -1,13 +1,16 @@
 import { Layout, LayoutType } from "@components/UI";
-import { LessonStatusTable } from "@components/uniq";
 import Head from "next/head";
 import { FC } from "react";
 
-const Home: FC & { Layout: LayoutType } = () => {
+export const getServerSideProps = async () => {
+  console.log("im in serverside props");
+  return { props: {} };
+};
+const Profile: FC & { Layout: LayoutType } = () => {
   return (
     <div>
       <Head>
-        <title>Student Pack</title>
+        <title>Profile</title>
         <meta
           name="description"
           content="A pack of things thal all student gonna need"
@@ -15,11 +18,11 @@ const Home: FC & { Layout: LayoutType } = () => {
         <link rel="icon" href="/favico.svg" type="image/svg+xml" />
       </Head>
 
-      <main className="p-1">
-        <LessonStatusTable />
+      <main>
+        <h1>profile page</h1>
       </main>
     </div>
   );
 };
-Home.Layout = Layout;
-export default Home;
+Profile.Layout = Layout;
+export default Profile;
