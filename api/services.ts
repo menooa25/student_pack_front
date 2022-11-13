@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { getCookie } from "cookies-next";
 import { BASE_URL } from "./baseUrl";
 import {
   RequestLesson,
@@ -9,7 +10,10 @@ import {
 } from "./schema";
 
 const sesson = axios.create({ baseURL: BASE_URL });
-
+const getAuthHeader = () => {
+  const access_token = getCookie("access") ?? "";
+  return { Authorization: `JWT ${access_token}` };
+};
 export const requestLessonList = async () => {
   try {
     const resp: AxiosResponse<RequestLessonList, any> = await sesson.get(
@@ -17,8 +21,8 @@ export const requestLessonList = async () => {
     );
     return resp;
   } catch (error) {
-    const e = error as AxiosError;
-    return e.response;
+    const e = error as AxiosError<RequestLessonList, any>;
+    return e.response!;
   }
 };
 export const requestLessonListSearch = async (search: string) => {
@@ -29,8 +33,8 @@ export const requestLessonListSearch = async (search: string) => {
     );
     return resp;
   } catch (error) {
-    const e = error as AxiosError;
-    return e.response;
+    const e = error as AxiosError<RequestLessonList, any>;
+    return e.response!;
   }
 };
 export const requestLessonDetail = async (id: number) => {
@@ -40,8 +44,8 @@ export const requestLessonDetail = async (id: number) => {
     );
     return resp;
   } catch (error) {
-    const e = error as AxiosError;
-    return e.response;
+    const e = error as AxiosError<RequestLesson, any>;
+    return e.response!;
   }
 };
 export const requestLessonFilter = async ({
@@ -55,8 +59,8 @@ export const requestLessonFilter = async ({
     );
     return resp;
   } catch (error) {
-    const e = error as AxiosError;
-    return e.response;
+    const e = error as AxiosError<RequestLessonList, any>;
+    return e.response!;
   }
 };
 
@@ -66,8 +70,8 @@ export const requestLessonFilterOptions = async () => {
       await sesson.get(`api/lessons/v1/filter_options/`);
     return resp;
   } catch (error) {
-    const e = error as AxiosError;
-    return e.response;
+    const e = error as AxiosError<RequestLessonFilterOptions, any>;
+    return e.response!;
   }
 };
 
@@ -86,6 +90,18 @@ export const requestLogin = async ({
     return resp;
   } catch (error) {
     const e = error as AxiosError<RequestLogin, any>;
+    return e.response!;
+  }
+};
+export const requestUserLessons = async () => {
+  try {
+    const resp: AxiosResponse<RequestLessonList, any> = await sesson.get(
+      `api/lessons/v1/`,
+      { headers: getAuthHeader() }
+    );
+    return resp;
+  } catch (error) {
+    const e = error as AxiosError<RequestLessonList, any>;
     return e.response!;
   }
 };

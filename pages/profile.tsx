@@ -1,9 +1,18 @@
 import { Layout, LayoutType } from "@components/UI";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { FC } from "react";
-
-export const getServerSideProps = async () => {
-  console.log("im in serverside props");
+import { Profile as ProfileComponent } from "@components/uniq/profile";
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = context.req.cookies;
+  const access_token = cookies["access"];
+  if (!access_token)
+    return {
+      redirect: {
+        permanent: true,
+        destination: "/login",
+      },
+    };
   return { props: {} };
 };
 const Profile: FC & { Layout: LayoutType } = () => {
@@ -19,7 +28,7 @@ const Profile: FC & { Layout: LayoutType } = () => {
       </Head>
 
       <main>
-        <h1>profile page</h1>
+        <ProfileComponent />
       </main>
     </div>
   );

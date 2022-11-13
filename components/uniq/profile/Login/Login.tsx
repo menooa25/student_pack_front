@@ -1,10 +1,12 @@
 import { requestLogin } from "api/services";
+import { useRouter } from "next/router";
 import React, { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "../profileSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const sendRequest = async (username: string, password: string) => {
@@ -16,6 +18,8 @@ const Login = () => {
         setToken({ accessToken: data.access, refreshToken: data.refresh })
       );
       setErrorMessage("");
+
+      router.push("/profile");
     } else if (status == 401) {
       setErrorMessage("رمز عبور یا نام کاربری اشتباه است");
     }
