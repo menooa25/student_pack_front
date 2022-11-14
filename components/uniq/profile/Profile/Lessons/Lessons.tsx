@@ -17,27 +17,29 @@ const Lessons = () => {
     sendRequest();
   }, []);
   return (
-    <table className="table table-zebra mx-auto table-compact text-center">
-      <thead>
-        <tr>
-          <th>نام درس</th>
-          <th>ساختمان</th>
-          <th>روز</th>
-          <th>ساعت شروع</th>
-          <th>وضعیت</th>
-        </tr>
-      </thead>
-      <tbody>
-        {lessons?.map((ls) => (
-          <Row key={ls.id} lesson={ls} />
-        ))}
-        <tr>
-          <td className="p-0" colSpan={5}>
-            <AddLesson />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div className="overflow-auto rounded-lg">
+      <table className="table table-zebra mx-auto table-compact text-center">
+        <thead>
+          <tr>
+            <th>نام درس</th>
+            <th>ساختمان</th>
+            <th>روز</th>
+            <th>ساعت شروع</th>
+            <th>وضعیت</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lessons?.map((ls) => (
+            <Row key={ls.id} lesson={ls} />
+          ))}
+          <tr>
+            <td className="p-0" colSpan={5}>
+              <AddLesson />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 

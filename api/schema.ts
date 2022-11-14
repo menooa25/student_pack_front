@@ -37,3 +37,10 @@ export interface RequestLogin {
   access: string;
   refresh: string;
 }
+export interface RequestCreateLesson {
+  name: string;
+  lesson_time: string;
+  lesson_day: number;
+  building: string;
+  status: string;
+}

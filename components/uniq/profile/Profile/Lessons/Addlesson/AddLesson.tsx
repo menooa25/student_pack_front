@@ -1,7 +1,23 @@
-import React from "react";
+import { RequestLessonFilterOptions } from "api/schema";
+import { requestLessonFilterOptions } from "api/services";
+import React, { useEffect, useState } from "react";
 import Form from "./Form";
 
 const AddLesson = () => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [options, setOptions] = useState<RequestLessonFilterOptions>({
+    building: [],
+    status: [],
+    teacher: [],
+  });
+  useEffect(() => {
+    const sendRequest = async () => {
+      const { data } = await requestLessonFilterOptions();
+      setOptions(data);
+    };
+    if (modalOpen) sendRequest();
+  }, [modalOpen]);
+
   return (
     <div>
       <label
@@ -11,7 +27,13 @@ const AddLesson = () => {
         +
       </label>
 
-      <input type="checkbox" id="add_new_lesson" className="modal-toggle" />
+      <input
+        type="checkbox"
+        checked={modalOpen}
+        onChange={() => setModalOpen(!modalOpen)}
+        id="add_new_lesson"
+        className="modal-toggle"
+      />
       <div className="modal">
         <div className="modal-box w-64 relative">
           <label
@@ -21,7 +43,7 @@ const AddLesson = () => {
             ✕
           </label>
           <h3 className="font-bold">افزودن درس</h3>
-          <Form/>
+          {modalOpen && <Form options={options} />}
         </div>
       </div>
     </div>

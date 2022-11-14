@@ -2,10 +2,12 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { getCookie } from "cookies-next";
 import { BASE_URL } from "./baseUrl";
 import {
+  RequestCreateLesson,
   RequestLesson,
   RequestLessonFilter,
   RequestLessonFilterOptions,
   RequestLessonList,
+  RequestLessonListSingle,
   RequestLogin,
 } from "./schema";
 
@@ -102,6 +104,19 @@ export const requestUserLessons = async () => {
     return resp;
   } catch (error) {
     const e = error as AxiosError<RequestLessonList, any>;
+    return e.response!;
+  }
+};
+export const requestCreateLesson = async (data: RequestCreateLesson) => {
+  try {
+    const resp: AxiosResponse<RequestLessonListSingle, any> = await sesson.post(
+      `api/lessons/v1/`,
+      data,
+      { headers: getAuthHeader() }
+    );
+    return resp;
+  } catch (error) {
+    const e = error as AxiosError<RequestLessonListSingle, any>;
     return e.response!;
   }
 };
