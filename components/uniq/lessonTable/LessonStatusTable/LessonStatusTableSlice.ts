@@ -6,11 +6,11 @@ export type SortOptions =
   | "name"
   | "lesson_time"
   | "lesson_day"
-  | "building"
+  | "building_name"
   | "created_at"
   | "updated_at"
   | "teacher"
-  | "status";
+  | "status_name";
 
 export interface LessonState {
   lessons: RequestLessonList | null;

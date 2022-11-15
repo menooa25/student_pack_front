@@ -20,10 +20,10 @@ const LessonStatusRow: FC<Props> = ({ lesson, onClick }) => {
         </label>
       </td>
       <td>{convetDayCode(lesson.lesson_day)}</td>
-      <td>{lesson.building}</td>
+      <td>{lesson.building_name}</td>
       <td>{lesson.lesson_time.slice(0, 5)}</td>
       <td>{lesson.teacher}</td>
-      <td>{lesson.status}</td>
+      <td>{lesson.status_name}</td>
     </tr>
   );
 };

@@ -19,7 +19,7 @@ const Form: FC<Props> = ({ options }) => {
     const { status } = await requestCreateLesson(data);
     if (status === 201)
       setMessage({ message: "درس با موفقیت اضافه شد", isError: false });
-    else if (status >= 401) router.push("/login");
+    else if (status === 401) router.push("/login");
     else if (status >= 400)
       setMessage({ message: "در اضافه کردن درس خطایی رخ داد", isError: true });
 
@@ -128,8 +128,8 @@ const Form: FC<Props> = ({ options }) => {
 
         {message.message && (
           <div
-            className={`alert whitespace-normal h-12 text-end mt-2 alert-${
-              message.isError ? "error" : "success"
+            className={`alert whitespace-normal h-12 text-end mt-2 ${
+              message.isError ? "alert-error" : "alert-success"
             }`}
           >
             <div>

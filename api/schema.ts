@@ -2,11 +2,11 @@ export interface RequestLessonListSingle {
   name: string;
   lesson_time: string;
   lesson_day: 0 | 1 | 2 | 3 | 4 | 5 | 6;
-  building: string;
+  building_name: string;
   created_at: string;
   updated_at: string;
   teacher: string;
-  status: string;
+  status_name: string;
   id: number;
 }
 
@@ -16,11 +16,11 @@ export interface RequestLesson {
   name: string;
   lesson_time: string;
   lesson_day: 0 | 1 | 2 | 3 | 4 | 5 | 6;
-  building: string;
+  building_name: string;
   created_at: string;
   updated_at: string;
   teacher: string;
-  status: string;
+  status_name: string;
   id: number;
 }
 export type LessonDayFilter = "" | "0" | "1" | "2" | "3" | "4" | "5" | "6";

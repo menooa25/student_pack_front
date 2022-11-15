@@ -32,7 +32,7 @@ const LessonDetail: FC<Props> = ({ modalId }) => {
           <h3 className=" font-bold text-center">
             {lesson?.name ?? <LoadingPlaceHolder width={100} height={10} />}
           </h3>
-          <div className="flex flex-col" dir="rtl">
+          <div className="flex flex-col items-start" dir="rtl">
             <span className="block">
               نام درس:{" "}
               {lesson?.name ?? <LoadingPlaceHolder width={100} height={10} />}
@@ -45,7 +45,7 @@ const LessonDetail: FC<Props> = ({ modalId }) => {
             </span>
             <span className="block">
               ساختمان:{" "}
-              {lesson?.building ?? (
+              {lesson?.building_name ?? (
                 <LoadingPlaceHolder width={100} height={10} />
               )}
             </span>
@@ -63,7 +63,9 @@ const LessonDetail: FC<Props> = ({ modalId }) => {
             </span>
             <span className="block">
               وضعیت:{" "}
-              {lesson?.status ?? <LoadingPlaceHolder width={100} height={10} />}
+              {lesson?.status_name ?? (
+                <LoadingPlaceHolder width={100} height={10} />
+              )}
             </span>
             <span className="block">آخرین بروزرسانی: {getUpdateTime()}</span>
           </div>
