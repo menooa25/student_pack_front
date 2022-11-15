@@ -44,3 +44,7 @@ export interface RequestCreateLesson {
   building: string;
   status: string;
 }
+
+export type RequestUserDetail = [
+  { name: string; username: string; role: string }
+];

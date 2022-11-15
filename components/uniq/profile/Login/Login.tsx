@@ -2,7 +2,7 @@ import { requestLogin } from "api/services";
 import { useRouter } from "next/router";
 import React, { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setToken } from "../profileSlice";
+import { setLogin, setToken } from "../profileSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ const Login = () => {
       dispatch(
         setToken({ accessToken: data.access, refreshToken: data.refresh })
       );
+      dispatch(setLogin(true));
       setErrorMessage("");
 
       router.push("/profile");

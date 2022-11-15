@@ -1,5 +1,6 @@
 import { setLesson } from "@components/uniq/lessonTable";
 import LessonDetail from "@components/uniq/lessonTable/LessonDetail";
+import { convetDayCode } from "@utils/lesson";
 import { RequestLessonListSingle } from "api/schema";
 import { requestLessonDetail } from "api/services";
 import React from "react";
@@ -28,7 +29,7 @@ const Row = ({ lesson }: { lesson: RequestLessonListSingle }) => {
           </label>
         </td>
         <td>{lesson.building_name}</td>
-        <td>{lesson.lesson_day}</td>
+        <td>{convetDayCode(lesson.lesson_day)}</td>
         <td>{lesson.lesson_time}</td>
         <td>{lesson.status_name}</td>
       </tr>

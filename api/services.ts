@@ -9,6 +9,7 @@ import {
   RequestLessonList,
   RequestLessonListSingle,
   RequestLogin,
+  RequestUserDetail,
 } from "./schema";
 
 const sesson = axios.create({ baseURL: BASE_URL });
@@ -117,6 +118,18 @@ export const requestCreateLesson = async (data: RequestCreateLesson) => {
     return resp;
   } catch (error) {
     const e = error as AxiosError<RequestLessonListSingle, any>;
+    return e.response!;
+  }
+};
+export const requestUserDetail = async () => {
+  try {
+    const resp: AxiosResponse<RequestUserDetail, any> = await sesson.get(
+      `api/user/`,
+      { headers: getAuthHeader() }
+    );
+    return resp;
+  } catch (error) {
+    const e = error as AxiosError<RequestUserDetail, any>;
     return e.response!;
   }
 };

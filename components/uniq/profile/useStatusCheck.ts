@@ -5,7 +5,9 @@ const useStatusCheck = () => {
   return (status: number) => {
     if (status === 401) {
       router.push("/login");
+      return false
     }
+    return true
   };
 };
 

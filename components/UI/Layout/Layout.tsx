@@ -1,3 +1,4 @@
+import { ProfileButton } from "@components/uniq/profile";
 import Link from "next/link";
 import React, { FC, ReactNode } from "react";
 import { FaUniversity } from "react-icons/fa";
@@ -19,9 +20,7 @@ const Layout: LayoutType = ({ children, search }) => {
 
           {search}
           <div className="flex justify-end">
-            <Link href={"/login"} className="btn btn-ghost btn-sm ">
-              ورود
-            </Link>
+            <ProfileButton />
           </div>
         </div>
       </div>

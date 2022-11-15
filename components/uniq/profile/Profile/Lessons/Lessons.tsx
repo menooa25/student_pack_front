@@ -11,8 +11,7 @@ const Lessons = () => {
   useEffect(() => {
     const sendRequest = async () => {
       const { data, status } = await requestUserLessons();
-      checkStatus(status);
-      setLessons(data);
+      if (checkStatus(status)) setLessons(data);
     };
     sendRequest();
   }, []);
