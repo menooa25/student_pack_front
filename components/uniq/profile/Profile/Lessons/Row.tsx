@@ -5,11 +5,15 @@ import { RequestLessonListSingle } from "api/schema";
 import { requestLessonDetail } from "api/services";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
 
-const Row = ({ lesson }: { lesson: RequestLessonListSingle }) => {
+const Row = ({
+  lesson,
+  idForModal,
+}: {
+  lesson: RequestLessonListSingle;
+  idForModal: string;
+}) => {
   const dispatch = useDispatch();
-  const idForModal = uuidv4();
   const onClickForDetail = async (id: number) => {
     dispatch(setLesson(null));
     const { data } = await requestLessonDetail(id);
@@ -33,7 +37,6 @@ const Row = ({ lesson }: { lesson: RequestLessonListSingle }) => {
         <td>{lesson.lesson_time}</td>
         <td>{lesson.status_name}</td>
       </tr>
-      <LessonDetail modalId={idForModal} />
     </>
   );
 };
