@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 const Lessons = () => {
   const checkStatus = useStatusCheck();
   const [lessons, setLessons] = useState<RequestLessonList>();
-  const idForModal = uuidv4();
+  const idForModal = "uniqeIdForProfileLessonDetail";
 
   useEffect(() => {
     const sendRequest = async () => {
