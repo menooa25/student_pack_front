@@ -1,7 +1,9 @@
+import { setRefresh } from "@components/uniq/profile/profileSlice";
 import { RequestCreateLesson, RequestLessonFilterOptions } from "api/schema";
 import { requestCreateLesson } from "api/services";
 import { useRouter } from "next/router";
 import React, { FC, FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
 
 interface Props {
   options: RequestLessonFilterOptions;
@@ -9,6 +11,7 @@ interface Props {
 
 const Form: FC<Props> = ({ options }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<{ message: string; isError: boolean }>(
     { message: "", isError: false }
@@ -17,9 +20,10 @@ const Form: FC<Props> = ({ options }) => {
     setMessage({ message: "", isError: false });
     setLoading(true);
     const { status } = await requestCreateLesson(data);
-    if (status === 201)
+    if (status === 201) {
       setMessage({ message: "درس با موفقیت اضافه شد", isError: false });
-    else if (status === 401) router.push("/login");
+      dispatch(setRefresh());
+    } else if (status === 401) router.push("/login");
     else if (status >= 400)
       setMessage({ message: "در اضافه کردن درس خطایی رخ داد", isError: true });
 

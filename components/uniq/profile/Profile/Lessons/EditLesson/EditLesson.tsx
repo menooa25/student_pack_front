@@ -1,5 +1,7 @@
+import { setRefresh } from "@components/uniq/profile/profileSlice";
 import { RequestLessonFilterOptions, RequestPatchLessons } from "api/schema";
 import { requestLessonFilterOptions, requestUpdateLesson } from "api/services";
+import { useRouter } from "next/router";
 import React, {
   FC,
   useContext,
@@ -7,12 +9,15 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { useDispatch } from "react-redux";
 import { Context } from "../context";
 import Form from "./Form";
 
 const EditLesson: FC = () => {
   const editlessonContext = useContext(Context);
   const [loading, setLodading] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [alertMessage, setAlertMessage] = useState({
     message: "",
     isError: false,
@@ -35,15 +40,18 @@ const EditLesson: FC = () => {
   }, [modalIsOpen]);
   const onSubmit = async (editLesson: RequestPatchLessons) => {
     setLodading(true);
-    const { data, status } = await requestUpdateLesson(
+    const { status } = await requestUpdateLesson(
       editlessonContext.lesson.id,
       editLesson
     );
     setLodading(false);
     if (status >= 400)
       setAlertMessage({ isError: true, message: "در ویرایش خطایی رخ داد" });
-    else
+    else if (status === 401) router.push("/login");
+    else {
       setAlertMessage({ isError: false, message: "ویرایش با موفقیت انجام شد" });
+      dispatch(setRefresh());
+    }
   };
   return (
     <div>

@@ -8,11 +8,13 @@ export interface Token {
 
 export interface Profile extends Token {
   isLogin: boolean;
+  refresh: {};
 }
 const initialState: Profile = {
   accessToken: (getCookie("access") as string) ?? "",
   refreshToken: (getCookie("refresh") as string) ?? "",
   isLogin: false,
+  refresh: {},
 };
 
 export const ProfileSlice = createSlice({
@@ -30,9 +32,12 @@ export const ProfileSlice = createSlice({
       const payload = action.payload;
       state.isLogin = payload;
     },
+    setRefresh: (state) => {
+      state.refresh = {};
+    },
   },
 });
 
-export const { setToken, setLogin } = ProfileSlice.actions;
+export const { setToken, setLogin, setRefresh } = ProfileSlice.actions;
 
 export default ProfileSlice.reducer;

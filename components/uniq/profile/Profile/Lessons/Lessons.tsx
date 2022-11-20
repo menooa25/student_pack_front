@@ -7,9 +7,12 @@ import AddLesson from "./Addlesson/AddLesson";
 import Row from "./Row";
 import EditLessonContext from "./context";
 import EditLesson from "./EditLesson";
+import { useSelector } from "react-redux";
+import { RootState } from "@redux/store";
 
 const Lessons = () => {
   const checkStatus = useStatusCheck();
+  const refresh = useSelector((state: RootState) => state.profile.refresh);
   const [lessons, setLessons] = useState<RequestLessonList>();
 
   useEffect(() => {
@@ -18,7 +21,7 @@ const Lessons = () => {
       if (checkStatus(status)) setLessons(data);
     };
     sendRequest();
-  }, []);
+  }, [refresh]);
   return (
     <EditLessonContext>
       <div className="overflow-auto rounded-lg">
@@ -43,7 +46,7 @@ const Lessons = () => {
             </tr>
           </tbody>
         </table>
-              <EditLesson/>
+        <EditLesson />
       </div>
     </EditLessonContext>
   );

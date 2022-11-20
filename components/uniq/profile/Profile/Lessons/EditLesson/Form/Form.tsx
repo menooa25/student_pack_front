@@ -4,6 +4,7 @@ import {
   RequestPatchLessons,
 } from "api/schema";
 import React, { FC, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 interface Props {
   lesson: RequestLesson;
   editOptions?: RequestLessonFilterOptions;
@@ -22,6 +23,7 @@ const Form: FC<Props> = ({
   useEffect(() => {
     setDisplayLesson(lesson);
   }, [lesson]);
+
   const convertNameToId = (
     identifyer: string | number,
     type: "building" | "status",
