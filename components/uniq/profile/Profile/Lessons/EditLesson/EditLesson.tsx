@@ -1,12 +1,22 @@
 import { RequestLessonFilterOptions, RequestPatchLessons } from "api/schema";
 import { requestLessonFilterOptions, requestUpdateLesson } from "api/services";
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, {
+  FC,
+  useContext,
+  useDebugValue,
+  useEffect,
+  useState,
+} from "react";
 import { Context } from "../context";
 import Form from "./Form";
 
 const EditLesson: FC = () => {
   const editlessonContext = useContext(Context);
   const [loading, setLodading] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState({
+    message: "",
+    isError: false,
+  });
   const [modalIsOpen, setModaIsOpen] = useState<boolean>(false);
   const [editOptions, setEditOptions] = useState<
     RequestLessonFilterOptions | undefined
@@ -18,14 +28,22 @@ const EditLesson: FC = () => {
     };
     sendRequest();
   }, []);
+  useEffect(() => {
+    if (!modalIsOpen) {
+      setAlertMessage({ isError: false, message: "" });
+    }
+  }, [modalIsOpen]);
   const onSubmit = async (editLesson: RequestPatchLessons) => {
     setLodading(true);
     const { data, status } = await requestUpdateLesson(
       editlessonContext.lesson.id,
       editLesson
     );
-    console.log(data, status);
     setLodading(false);
+    if (status >= 400)
+      setAlertMessage({ isError: true, message: "در ویرایش خطایی رخ داد" });
+    else
+      setAlertMessage({ isError: false, message: "ویرایش با موفقیت انجام شد" });
   };
   return (
     <div>
@@ -55,6 +73,45 @@ const EditLesson: FC = () => {
                 onSubmit={onSubmit}
                 loading={loading}
               />
+            )}
+            {alertMessage.message && (
+              <div
+                dir="ltr"
+                className={`alert whitespace-normal h-12 text-end mt-2 ${
+                  alertMessage.isError ? "alert-error" : "alert-success"
+                }`}
+              >
+                {alertMessage.isError ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="stroke-current flex-shrink-0 h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="stroke-current flex-shrink-0 h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                )}
+                <span>{alertMessage.message}</span>
+              </div>
             )}
           </div>
         </div>
