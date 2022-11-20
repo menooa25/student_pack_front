@@ -85,7 +85,7 @@ const EditLesson: FC = () => {
             {alertMessage.message && (
               <div
                 dir="ltr"
-                className={`alert whitespace-normal h-12 text-end mt-2 ${
+                className={`alert flex-row whitespace-normal h-12 text-end mt-2 ${
                   alertMessage.isError ? "alert-error" : "alert-success"
                 }`}
               >

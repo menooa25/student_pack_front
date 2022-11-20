@@ -132,7 +132,7 @@ const Form: FC<Props> = ({ options }) => {
 
         {message.message && (
           <div
-            className={`alert whitespace-normal h-12 text-end mt-2 ${
+            className={`alert whitespace-normal flex-row h-12 text-end mt-2 ${
               message.isError ? "alert-error" : "alert-success"
             }`}
           >
