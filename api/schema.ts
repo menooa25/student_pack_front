@@ -48,3 +48,10 @@ export interface RequestCreateLesson {
 export type RequestUserDetail = [
   { name: string; username: string; role: string }
 ];
+export interface RequestPatchLessons {
+  name?: string;
+  lesson_time?: string;
+  lesson_day?: number;
+  building?: number;
+  status?: number;
+}

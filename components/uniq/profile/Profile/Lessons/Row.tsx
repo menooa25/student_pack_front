@@ -3,22 +3,16 @@ import LessonDetail from "@components/uniq/lessonTable/LessonDetail";
 import { convetDayCode } from "@utils/lesson";
 import { RequestLessonListSingle } from "api/schema";
 import { requestLessonDetail } from "api/services";
-import React from "react";
+import React, { FC, useContext } from "react";
 import { useDispatch } from "react-redux";
+import { Context } from "./context";
 
-const Row = ({
-  lesson,
-  idForModal,
-}: {
+interface Props {
   lesson: RequestLessonListSingle;
-  idForModal: string;
-}) => {
-  const dispatch = useDispatch();
-  const onClickForDetail = async (id: number) => {
-    dispatch(setLesson(null));
-    const { data } = await requestLessonDetail(id);
-    dispatch(setLesson(data));
-  };
+}
+
+const Row: FC<Props> = ({ lesson }) => {
+  const editLessonContext = useContext(Context);
 
   return (
     <>
@@ -26,8 +20,8 @@ const Row = ({
         <td className="sticky left-0">
           <label
             className="cursor-pointer"
-            htmlFor={idForModal}
-            onClick={() => onClickForDetail(lesson.id)}
+            htmlFor={editLessonContext.modalId}
+            onClick={() => editLessonContext.onSetLesson(lesson)}
           >
             {lesson.name}
           </label>

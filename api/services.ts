@@ -9,6 +9,7 @@ import {
   RequestLessonList,
   RequestLessonListSingle,
   RequestLogin,
+  RequestPatchLessons,
   RequestUserDetail,
 } from "./schema";
 
@@ -125,6 +126,22 @@ export const requestUserDetail = async () => {
   try {
     const resp: AxiosResponse<RequestUserDetail, any> = await sesson.get(
       `api/user/`,
+      { headers: getAuthHeader() }
+    );
+    return resp;
+  } catch (error) {
+    const e = error as AxiosError<RequestUserDetail, any>;
+    return e.response!;
+  }
+};
+export const requestUpdateLesson = async (
+  lesson_id: number,
+  editedLesson: RequestPatchLessons
+) => {
+  try {
+    const resp: AxiosResponse<RequestUserDetail, any> = await sesson.patch(
+      `api/lessons/v1/${lesson_id}/`,
+      editedLesson,
       { headers: getAuthHeader() }
     );
     return resp;
