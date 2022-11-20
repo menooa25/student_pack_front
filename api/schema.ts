@@ -44,10 +44,13 @@ export interface RequestCreateLesson {
   building: string;
   status: string;
 }
+export interface UserDetail {
+  name: string;
+  username: string;
+  role: string;
+}
 
-export type RequestUserDetail = [
-  { name: string; username: string; role: string }
-];
+export type RequestUserDetail = [UserDetail];
 export interface RequestPatchLessons {
   name?: string;
   lesson_time?: string;

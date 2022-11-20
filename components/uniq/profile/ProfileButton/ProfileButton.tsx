@@ -35,6 +35,16 @@ const ProfileButton = () => {
             >
               <a className="p-1">خروج</a>
             </li>
+            <li>
+              <a
+                onClick={() => {
+                  router.push("/lessons");
+                }}
+                className="p-1"
+              >
+                دروس
+              </a>
+            </li>
           </ul>
         )}
       </div>

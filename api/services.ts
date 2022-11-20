@@ -11,6 +11,7 @@ import {
   RequestLogin,
   RequestPatchLessons,
   RequestUserDetail,
+  RequestUserInfo,
 } from "./schema";
 
 const sesson = axios.create({ baseURL: BASE_URL });
@@ -122,11 +123,13 @@ export const requestCreateLesson = async (data: RequestCreateLesson) => {
     return e.response!;
   }
 };
-export const requestUserDetail = async () => {
+export const requestUserDetail = async (accessToken?: string) => {
   try {
     const resp: AxiosResponse<RequestUserDetail, any> = await sesson.get(
       `api/user/`,
-      { headers: getAuthHeader() }
+      {
+        headers: accessToken ? { Authorization: accessToken } : getAuthHeader(),
+      }
     );
     return resp;
   } catch (error) {
