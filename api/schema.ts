@@ -58,3 +58,7 @@ export interface RequestPatchLessons {
   building?: number;
   status?: number;
 }
+export interface RequestChnagePassword {
+  password_one: string;
+  password_two: string;
+}

@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { getCookie } from "cookies-next";
 import { BASE_URL } from "./baseUrl";
 import {
+  RequestChnagePassword,
   RequestCreateLesson,
   RequestLesson,
   RequestLessonFilter,
@@ -11,7 +12,7 @@ import {
   RequestLogin,
   RequestPatchLessons,
   RequestUserDetail,
-  RequestUserInfo,
+  UserDetail,
 } from "./schema";
 
 const sesson = axios.create({ baseURL: BASE_URL });
@@ -150,6 +151,19 @@ export const requestUpdateLesson = async (
     return resp;
   } catch (error) {
     const e = error as AxiosError<RequestUserDetail, any>;
+    return e.response!;
+  }
+};
+export const requestChangePassword = async (data: RequestChnagePassword) => {
+  try {
+    const resp: AxiosResponse<UserDetail, any> = await sesson.put(
+      `api/user/`,
+      data,
+      { headers: getAuthHeader() }
+    );
+    return resp;
+  } catch (error) {
+    const e = error as AxiosError<UserDetail, any>;
     return e.response!;
   }
 };
