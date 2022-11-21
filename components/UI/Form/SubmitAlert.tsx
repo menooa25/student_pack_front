@@ -10,7 +10,7 @@ const SubmitAlert: FC<Props> = ({ isError, message }) => {
   if (isError)
     return (
       <div
-        className={`alert whitespace-normal flex-row h-12 text-end mt-2 alert-error max-w-fit`}
+        className={`alert whitespace-normal flex-row h-12 text-right mt-2 alert-error max-w-fit `}
       >
         <div>
           <svg
@@ -34,7 +34,7 @@ const SubmitAlert: FC<Props> = ({ isError, message }) => {
   else
     return (
       <div
-        className={`alert whitespace-normal flex-row h-12 text-end mt-2 alert-success max-w-fit`}
+        className={`alert whitespace-normal flex-row h-12 text-right mt-2 alert-success max-w-fit `}
       >
         <div>
           <svg
