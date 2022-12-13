@@ -50,6 +50,12 @@ const LessonDetail: FC<Props> = ({ modalId }) => {
               )}
             </span>
             <span className="block">
+              کلاس:{" "}
+              {lesson?.class_number ?? (
+                  <LoadingPlaceHolder width={100} height={10} />
+              )}
+            </span>
+            <span className="block">
               زمان کلاس:{" "}
               {lesson?.lesson_time.slice(0, 5) ?? (
                 <LoadingPlaceHolder width={100} height={10} />

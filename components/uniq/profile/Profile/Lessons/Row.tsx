@@ -23,6 +23,7 @@ const Row: FC<Props> = ({ lesson }) => {
           </label>
         </td>
         <td>{lesson.building_name}</td>
+        <td>{lesson.class_number}</td>
         <td>{convetDayCode(lesson.lesson_day)}</td>
         <td>{lesson.lesson_time.substring(0, 5)}</td>
         <td>{lesson.status_name}</td>

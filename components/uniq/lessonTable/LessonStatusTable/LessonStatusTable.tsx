@@ -38,6 +38,8 @@ const LessonStatusTable: FC = () => {
               <th onClick={() => dispatch(sortByTime("name"))}>نام درس</th>
               <th onClick={() => dispatch(sortByTime("lesson_day"))}>روز</th>
               <th onClick={() => dispatch(sortByTime("building_name"))}>ساختمان</th>
+              <th>کلاس</th>
+
               <th onClick={() => dispatch(sortByTime("lesson_time"))}>
                 ساعت شروع
               </th>

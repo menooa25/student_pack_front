@@ -30,6 +30,8 @@ const Lessons = () => {
             <tr>
               <th>نام درس</th>
               <th>ساختمان</th>
+              <th>کلاس</th>
+
               <th>روز</th>
               <th>ساعت شروع</th>
               <th>وضعیت</th>
@@ -40,7 +42,7 @@ const Lessons = () => {
               <Row key={ls.id} lesson={ls} />
             ))}
             <tr>
-              <td className="p-0" colSpan={5}>
+              <td className="p-0" colSpan={6}>
                 <AddLesson />
               </td>
             </tr>

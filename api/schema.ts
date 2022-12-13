@@ -7,6 +7,7 @@ export interface RequestLessonListSingle {
   updated_at: string;
   teacher: string;
   status_name: string;
+  class_number:number;
   id: number;
 }
 
@@ -20,6 +21,8 @@ export interface RequestLesson {
   created_at: string;
   updated_at: string;
   teacher: string;
+  class_number:number;
+
   status_name: string;
   id: number;
 }
@@ -56,6 +59,8 @@ export interface RequestPatchLessons {
   lesson_time?: string;
   lesson_day?: number;
   building?: number;
+  class_number?:number;
+
   status?: number;
 }
 export interface RequestChnagePassword {

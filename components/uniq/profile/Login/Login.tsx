@@ -46,7 +46,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex justify-center  items-center">
+    <div className="flex justify-center   items-center">
       <form
         onSubmit={onSubmit}
         className="mt-3 bg-base-100 w-full   mx-3 xs:w-auto sm:mx-auto   p-3 rounded form-control "
