@@ -2,12 +2,7 @@ import { setRefresh } from "@components/uniq/profile/profileSlice";
 import { RequestLessonFilterOptions, RequestPatchLessons } from "api/schema";
 import { requestLessonFilterOptions, requestUpdateLesson } from "api/services";
 import { useRouter } from "next/router";
-import React, {
-  FC,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Context } from "../context";
 import Form from "./Form";
@@ -61,6 +56,7 @@ const EditLesson: FC = () => {
         checked={modalIsOpen}
         onChange={() => setModaIsOpen(!modalIsOpen)}
       />
+
       <div className="modal">
         <div className="modal-box relative max-w-sm ">
           <label

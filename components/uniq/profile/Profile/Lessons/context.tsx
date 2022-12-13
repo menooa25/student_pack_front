@@ -8,7 +8,13 @@ interface ContextState {
 interface EditLessonInterface extends ContextState {
   onSetLesson: (lesson: RequestLesson) => void;
 }
-const initialValue: EditLessonInterface = {
+interface DeleteLessonInterface extends ContextState {
+  deleteModalId: string;
+  lessonNameForDelete: string;
+  lessonIdForDelete: string;
+  onDelete: (lessonId: string, lessonName: string) => void;
+}
+const initialValue: EditLessonInterface & DeleteLessonInterface = {
   lesson: {
     building_name: "",
     created_at: "",
@@ -18,24 +24,40 @@ const initialValue: EditLessonInterface = {
     name: "",
     status_name: "",
     teacher: "",
-    class_number:null,
+    class_number: null,
     updated_at: "",
   },
   modalId: "",
   onSetLesson() {},
+  onDelete() {},
+  deleteModalId: "",
+  lessonIdForDelete: "",
+  lessonNameForDelete: "",
 };
 
-export const Context = createContext<EditLessonInterface>(initialValue);
+export const Context = createContext<
+  EditLessonInterface & DeleteLessonInterface
+>(initialValue);
 interface Props {
   children: ReactNode | ReactNode[];
 }
 const EditLessonContext: FC<Props> = ({ children }) => {
-  const [contextState, setContextState] = useState<ContextState>(initialValue);
+  const [contextState, setContextState] = useState<
+    EditLessonInterface & DeleteLessonInterface
+  >(initialValue);
   const onSetLesson = (lesson: RequestLesson) => {
-    setContextState({ modalId: uuidv4(), lesson });
+    setContextState({ ...contextState, modalId: uuidv4(), lesson });
+  };
+  const onDelete = (lessonId: string, lessonName: string) => {
+    setContextState({
+      ...contextState,
+      deleteModalId: uuidv4(),
+      lessonIdForDelete: lessonId,
+      lessonNameForDelete: lessonName,
+    });
   };
   return (
-    <Context.Provider value={{ ...contextState, onSetLesson }}>
+    <Context.Provider value={{ ...contextState, onSetLesson, onDelete }}>
       {children}
     </Context.Provider>
   );

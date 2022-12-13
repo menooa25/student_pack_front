@@ -22,7 +22,7 @@ const AddLesson = () => {
     <div>
       <label
         htmlFor="add_new_lesson"
-        className="btn-sm bg-base-300 rounded-t-none btn w-full m-0 rounded-lg"
+        className="btn-sm bg-base-300 w-full rounded-t-none btn  m-0 rounded-lg "
       >
         +
       </label>

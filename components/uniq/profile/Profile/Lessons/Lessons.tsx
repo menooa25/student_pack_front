@@ -9,6 +9,7 @@ import EditLessonContext from "./context";
 import EditLesson from "./EditLesson";
 import { useSelector } from "react-redux";
 import { RootState } from "@redux/store";
+import DeleteLesson from "@components/uniq/profile/Profile/Lessons/DeleteLesson";
 
 const Lessons = () => {
   const checkStatus = useStatusCheck();
@@ -35,6 +36,7 @@ const Lessons = () => {
               <th>روز</th>
               <th>ساعت شروع</th>
               <th>وضعیت</th>
+              <th>حذف</th>
             </tr>
           </thead>
           <tbody>
@@ -42,12 +44,13 @@ const Lessons = () => {
               <Row key={ls.id} lesson={ls} />
             ))}
             <tr>
-              <td className="p-0" colSpan={6}>
+              <td className={"p-0"}>
                 <AddLesson />
               </td>
             </tr>
           </tbody>
         </table>
+        <DeleteLesson />
         <EditLesson />
       </div>
     </EditLessonContext>

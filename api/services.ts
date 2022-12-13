@@ -144,7 +144,7 @@ export const requestUpdateLesson = async (
 ) => {
   try {
     const resp: AxiosResponse<RequestUserDetail, any> = await sesson.patch(
-      `api/lessons/v1/${lesson_id}/`,
+      ``,
       editedLesson,
       { headers: getAuthHeader() }
     );
@@ -159,6 +159,18 @@ export const requestChangePassword = async (data: RequestChnagePassword) => {
     const resp: AxiosResponse<UserDetail, any> = await sesson.put(
       `api/user/`,
       data,
+      { headers: getAuthHeader() }
+    );
+    return resp;
+  } catch (error) {
+    const e = error as AxiosError<UserDetail, any>;
+    return e.response!;
+  }
+};
+export const requestDeleteLesson = async (lessonId: string) => {
+  try {
+    const resp: AxiosResponse<any, any> = await sesson.delete(
+      `api/lessons/v1/${lessonId}`,
       { headers: getAuthHeader() }
     );
     return resp;
