@@ -108,7 +108,7 @@ const Form: FC<Props> = ({
                     ))}
                 </select>
                 <label className="label pb-1">کلاس</label>
-                <input value={displayLesson.class_number} onChange={({target: {value}}) => {
+                <input value={displayLesson.class_number ?? ''} onChange={({target: {value}}) => {
                     setDisplayLesson({
                         ...displayLesson,
                         class_number: Number(value)

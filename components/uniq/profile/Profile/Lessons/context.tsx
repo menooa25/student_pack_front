@@ -18,6 +18,7 @@ const initialValue: EditLessonInterface = {
     name: "",
     status_name: "",
     teacher: "",
+    class_number:null,
     updated_at: "",
   },
   modalId: "",
