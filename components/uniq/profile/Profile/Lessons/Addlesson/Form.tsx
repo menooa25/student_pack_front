@@ -4,6 +4,7 @@ import { requestCreateLesson } from "api/services";
 import { useRouter } from "next/router";
 import React, { FC, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
+import { SubmitAlert } from "@components/UI";
 
 interface Props {
   options: RequestLessonFilterOptions;
@@ -37,12 +38,14 @@ const Form: FC<Props> = ({ options }) => {
     const lesson_day = form.get("lesson_day") as string;
     const building = form.get("building") as string;
     const status = form.get("status") as string;
+    const class_number = form.get("class_number") as string;
     const data: RequestCreateLesson = {
       name,
       lesson_time,
       lesson_day: Number(lesson_day),
       building,
       status,
+      class_number: Number(class_number),
     };
     sendRequest(data);
   };
@@ -111,6 +114,16 @@ const Form: FC<Props> = ({ options }) => {
               </option>
             ))}
           </select>
+          <label htmlFor="add_lesson_class_number">کلاس</label>
+          <input
+            required
+            id="add_lesson_class_number"
+            name="class_number"
+            className="input input-bordered input-sm rounded mt-1"
+            type="number"
+            onInvalid={onValidte}
+            onInput={onInput}
+          />
           <label htmlFor="add_lesson_status">وضعیت</label>
           <select
             id="add_lesson_status"
@@ -129,47 +142,7 @@ const Form: FC<Props> = ({ options }) => {
         >
           افزودن
         </button>
-
-        {message.message && (
-          <div
-            className={`alert whitespace-normal flex-row h-12 text-end mt-2 ${
-              message.isError ? "alert-error" : "alert-success"
-            }`}
-          >
-            <div>
-              {message.isError ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="stroke-current flex-shrink-0 h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="stroke-current flex-shrink-0 h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              )}
-              <span>{message.message}</span>
-            </div>
-          </div>
-        )}
+        <SubmitAlert isError={message.isError} message={message.message} />
       </form>
     </>
   );
