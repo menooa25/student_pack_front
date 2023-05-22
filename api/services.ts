@@ -144,7 +144,7 @@ export const requestUpdateLesson = async (
 ) => {
   try {
     const resp: AxiosResponse<RequestUserDetail, any> = await sesson.patch(
-      ``,
+      `api/lessons/v1/${lesson_id}`,
       editedLesson,
       { headers: getAuthHeader() }
     );
